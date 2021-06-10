@@ -3,12 +3,15 @@
 const form = document.querySelector('#task-form'),
     task = document.querySelector('#task'),
     ul = document.querySelector('.collection'),
-    clrBtn = document.querySelector('.clear-tasks');
+    clrBtn = document.querySelector('.clear-tasks'),
+    Filter = document.querySelector('#filter');
 
 
 form.addEventListener('submit', addTask);
 ul.addEventListener('click', removeItem);
-clrBtn.addEventListener('click', clearAll)
+clrBtn.addEventListener('click', clearAll);
+
+Filter.addEventListener('keyup',filter);
 
 
 
@@ -89,4 +92,19 @@ function clearAll() {
                 }
             });
     }
+}
+
+function filter(e){
+    const text = e.target.value.toLowerCase();
+    document.querySelectorAll('.collection-item').forEach((task)=>{
+        const item = task.firstChild.textContent; 
+        if (item.toLocaleLowerCase().indexOf(text) !== -1) {
+            task.style.display = 'block';
+        }else{
+
+            task.style.display = 'none';
+        }
+    });
+
+    // console.log(text);
 }
