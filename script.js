@@ -45,8 +45,6 @@ function addTask(e) {
 function removeItem(e) {
     if (e.target.parentElement.classList.contains('delete-item')) {
 
-
-
         swal({
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover your Task again!",
@@ -61,13 +59,34 @@ function removeItem(e) {
                         icon: "success",
                     });
                 } else {
-                    swal("Your imaginary file is safe!");
+                    swal("Your Task is safe!");
                 }
             });
 
     }
 }
 
-function clearAll(){
-    ul.innerHTML = ''
+function clearAll() {
+
+    if (ul.innerHTML !== '') {
+        
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover your Tasks again!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    ul.innerHTML = '';
+    
+                    swal("Your Tasks has been deleted!", {
+                        icon: "success",
+                    });
+                } else {
+                    swal("Your Tasks are safe!");
+                }
+            });
+    }
 }
