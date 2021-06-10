@@ -105,6 +105,4 @@ function filter(e){
             task.style.display = 'none';
         }
     });
-
-    // console.log(text);
 }
