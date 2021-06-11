@@ -4,8 +4,8 @@
 
 ## Acknowledgements
 
-- Add a new todo item.
-- Strikeout the todo item if it is completed.
-- Delete the todo item.
-- Then always save the todo items permanently on LocalStorage.
+- Add a new Task item.
+- Strikeout the Task item if it is completed.
+- Delete the Task item.
+- Then always save the Task items permanently on LocalStorage.
   
