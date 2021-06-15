@@ -1,6 +1,6 @@
 # GhoriTask
 
-![GitHub commits since latest release (by date)](https://img.shields.io/github/commits-since/yashghori/GMusic/latest?color=44CC11&style=flat-round)
+![GitHub commits since latest release (by date)](https://img.shields.io/github/commits-since/yashghori/GhoriTask/latest?color=44CC11&style=flat-round)
 
 ## Acknowledgements
 
