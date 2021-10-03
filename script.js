@@ -1,20 +1,9 @@
-// Definr our UL variable
-
-const form = document.querySelector('#task-form'),
+// Define variables
+const addTaskBtn = document.querySelector('#addtask-btn'),
     task = document.querySelector('#task'),
     ul = document.querySelector('.collection'),
-    clrBtn = document.querySelector('.clear-tasks'),
-    Filter = document.querySelector('#filter');
-load();
+    clrBtn = document.querySelector('.clear-tasks');
 
-function load() {
-
-    form.addEventListener('submit', addTask);
-    ul.addEventListener('click', removeItem);
-    clrBtn.addEventListener('click', clearAll);
-    Filter.addEventListener('keyup', filter);
-    document.addEventListener('DOMContentLoaded', getTask);
-}
 // get localstorage
 function getTask() {
     let tasks;
@@ -39,43 +28,49 @@ function getTask() {
         // append a into li.
         li.appendChild(a);
 
-        //append li in to ul
+        // append li in to ul
         ul.appendChild(li);
 
     })
 }
 
+function addLogic() {
+    // create li
+    const li = document.createElement('li');
+    li.className = 'collection-item';
+    li.textContent = task.value;
+
+    // create a.
+    const a = document.createElement('a');
+    a.className = 'delete-item secondary-content';
+    a.setAttribute('href', '#');
+    a.innerHTML = '<i class="fa fa-remove"></i>';
+
+    // append a into li.
+    li.appendChild(a);
+
+    // append li in to ul
+    ul.appendChild(li);
+
+    // Store in local storage
+    storeTaskInLocalStorage(task.value);
+
+    // remove string from input bar
+    task.value = '';
+}
 
 
 function addTask(e) {
-
-    // check user ad input or not
+    // check user input
+    console.log(localStorage.getItem('tasks'));
     if (task.value === '') {
         swal("Please Enter Task!");
+    } else if(localStorage.getItem('tasks') == null) {
+        addLogic();
+    } else if(localStorage.getItem('tasks').includes(task.value)) {
+        swal("Duplicate Task!");
     } else {
-
-        // create li
-        const li = document.createElement('li');
-        li.className = 'collection-item';
-        li.textContent = task.value;
-
-        // create a.
-        const a = document.createElement('a');
-        a.className = 'delete-item secondary-content';
-        a.setAttribute('href', '#');
-        a.innerHTML = '<i class="fa fa-remove"></i>';
-
-        // append a into li.
-        li.appendChild(a);
-
-        //append li in to ul
-        ul.appendChild(li);
-
-        // Store in local storage
-        storeTaskInLocalStorage(task.value);
-
-        // remove string from input bar
-        task.value = '';
+        addLogic();
     }
 
     e.preventDefault();
@@ -109,7 +104,7 @@ function removeItem(e) {
                         icon: "success",
                     });
                     e.target.parentElement.parentElement.remove();
-                    //remove from local storage
+                    // remove from local storage
                     removeTaskFromLocalStorage(e.target.parentElement.parentElement);
                     
 
@@ -120,7 +115,7 @@ function removeItem(e) {
 
     }
 }
-//remove from LS
+// remove from LS
 function removeTaskFromLocalStorage(taskItem){
     let tasks;
     if (localStorage.getItem('tasks') === null) {
@@ -163,7 +158,7 @@ function clearAll() {
     }
 }
 
-//clear all from local storage
+// clear all from local storage
 function clearFromLocalStorage(){
     localStorage.clear();
 }
@@ -180,3 +175,9 @@ function filter(e) {
         }
     });
 }
+
+// event listeners
+addTaskBtn.addEventListener('click', addTask);
+ul.addEventListener('click', removeItem);
+clrBtn.addEventListener('click', clearAll);
+document.addEventListener('DOMContentLoaded', getTask);
