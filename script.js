@@ -62,7 +62,6 @@ function addLogic() {
 
 function addTask(e) {
     // check user input
-    console.log(localStorage.getItem('tasks'));
     if (task.value === '') {
         swal("Please Enter Task!");
     } else if(localStorage.getItem('tasks') == null) {
